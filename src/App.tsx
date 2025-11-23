@@ -6,7 +6,8 @@ import './App.css';
 
 interface Recipe {
   dishName: string;
-  steps: string[];
+  cookingTime: string;
+  recipe: string;
 }
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleAddIngredient = () => {
     if (inputValue.trim() !== '') {
@@ -33,24 +35,29 @@ function App() {
     }
     setLoading(true);
     setRecipe(null);
+    setError(null);
 
-    // 백엔드 API 호출 시뮬레이션
-    // 실제로는 여기서 fetch나 axios를 사용하여 백엔드에 ingredients를 보냅니다.
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch('http://localhost:3001/api/recipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ingredients }),
+      });
 
-    // 백엔드로부터 받은 가상의 데이터
-    const mockRecipe: Recipe = {
-      dishName: '김치찌개',
-      steps: [
-        '1. 김치와 돼지고기를 냄비에 넣고 볶습니다.',
-        '2. 물을 붓고 끓입니다.',
-        '3. 두부, 파, 마늘을 넣고 한소끔 더 끓입니다.',
-        '4. 소금이나 국간장으로 간을 맞춥니다.'
-      ]
-    };
-    
-    setRecipe(mockRecipe);
-    setLoading(false);
+      if (!response.ok) {
+        throw new Error('서버에서 레시피를 받아오는데 실패했습니다.');
+      }
+
+      const data: Recipe = await response.json();
+      setRecipe(data);
+
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -81,12 +88,15 @@ function App() {
         </button>
         
         {loading && <p>맛있는 요리를 찾고 있습니다...</p>}
+        
+        {error && <p className="error-message">{error}</p>}
 
-        {recipe && (
+        {recipe && recipe.recipe && (
           <div className="recipe-result">
             <h2>추천 요리: {recipe.dishName}</h2>
+            <p className="cooking-time">예상 조리 시간: {recipe.cookingTime}</p>
             <ol>
-              {recipe.steps.map((step, index) => (
+              {recipe.recipe.split('\n').map((step, index) => (
                 <li key={index}>{step}</li>
               ))}
             </ol>
