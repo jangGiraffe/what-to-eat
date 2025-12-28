@@ -1,73 +1,24 @@
-# React + TypeScript + Vite
+# WHAT-TO-EAT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+간단하고 빠르게 오늘 뭘 먹을지 결정하도록 도와주는 React + TypeScript 기반 웹 애플리케이션입니다.
 
-Currently, two official plugins are available:
+## 소개
+- ![alt text](image-1.png)
+- **WHAT-TO-EAT**는 사용자가 메뉴 선택에 고민할 때 랜덤 또는 필터 기반으로 추천을 제공하고, 개인화된 즐겨찾기 기능을 통해 다음 선택을 더 쉽게 만들어 줍니다.
+- 목표: 가볍고 사용하기 쉬운 UI로 식사 선택 과정을 단순화.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## 주요 기능
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 메뉴 추천(무작위 / 조건 필터)
+- 즐겨찾기(찜하기) 및 추천 이력 저장(로컬 스토리지)
+- 간단한 필터(한식/중식/분식 등)와 검색
+- 반응형 UI (데스크톱/모바일)
 
-## Expanding the ESLint configuration
+## 사용 기술
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- 프레임워크: React (v19)
+- 언어: TypeScript
+- 번들러/개발 서버: Vite (rolldown-vite)
+- 린트: ESLint (+ 관련 플러그인)
+- 빌드/개발 도구: npm 스크립트 (dev, build, preview)
