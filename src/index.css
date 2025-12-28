@@ -1,78 +1,32 @@
 :root {
-  /* Font & General */
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  color-scheme: light dark;
-
-  /* Dark Theme (Default) */
-  --color-text: rgba(255, 255, 255, 0.87);
-  --color-background: #242424;
-  --color-primary: #646cff;
-  --color-primary-hover: #535bf2;
-  --color-surface-1: #1a1a1a;
-  --color-surface-2: #2a2a2a;
-  --color-border: #444;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    /* Light Theme */
-    --color-text: #213547;
-    --color-background: #ffffff;
-    --color-primary: #646cff;
-    --color-primary-hover: #747bff;
-    --color-surface-1: #f9f9f9;
-    --color-surface-2: #f0f0f0;
-    --color-border: #eee;
-  }
+  --ig-primary-background: #ffffff;
+  --ig-secondary-background: #fafafa;
+  --ig-text-primary: #262626;
+  --ig-text-secondary: #8e8e8e;
+  --ig-link: #0095f6;
+  --ig-stroke: #dbdbdb;
+  --ig-button-text: #ffffff;
+  --ig-error: #ed4956;
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  font-family: var(--font-stack);
+  background-color: #fafafa; /* Page background outside the app */
+  color: var(--ig-text-primary);
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  justify-content: center;
   min-height: 100vh;
-  color: var(--color-text);
-  background-color: var(--color-background);
 }
 
-a {
-  font-weight: 500;
-  color: var(--color-primary);
-  text-decoration: inherit;
-}
-a:hover {
-  color: var(--color-primary-hover);
+* {
+  box-sizing: border-box;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--color-surface-1);
-  cursor: pointer;
-  transition: border-color 0.25s;
-  color: var(--color-text); /* Ensure button text is readable */
-}
-button:hover {
-  border-color: var(--color-primary);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Scrollbar hiding for cleaner look */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
